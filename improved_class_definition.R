@@ -1,3 +1,5 @@
+
+
 new_player <- function(name, age = 0, choosing_method = runif) {
   structure(
     list(
@@ -22,7 +24,8 @@ print.Player <- function(x) {
 decidePlayer <- function(x) UseMethod("decide")
 
 decide.Player <- function(x) {
-  x$my_next_choice <- x$my_choosing_method(1)
+  print(x$my_choosing_method)
+  x$my_next_choice <- x$my_choosing_method(1) * x$age
   x
 }
 

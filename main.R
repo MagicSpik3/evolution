@@ -7,6 +7,7 @@ new_player <- function(name, age = 0) {
       last_choice = NULL,
       last_opponent_choice = NULL,
       my_next_choice = NULL,
+      my_choosing_method =
       age = age),
 
     class = "Player"
@@ -17,29 +18,35 @@ print.Player <- function(x) {
   cat("Player: \n")
   cat("\tName: ", x$name, "\n", sep = "")
   cat("\tAge: ", x$age, "\n", sep = "")
+  cat("\tMy Next Choice: ", x$my_next_choice, "\n", sep = "")
 }
-
-mean(rnorm(100))
-mean(runif(100))
-
+decidePlayer <- function(x) UseMethod("decide")
 decide.Player <- function(x){
-  x$age
+  x$my_next_choice <- 1 # this needs to be changed based on the method, for example, runif, or rnorm
+  x
 }
+
+
 
 doubleAGE <- function(x) UseMethod("doubleAGE")
-
 doubleAGE.Player <- function(x) {
   x$age <- x$age*2
   x
 }
 
-p1 <- doubleAGE(p1)
-p1
-
-decide.Player(p1)
 
 p1 <- new_player(name = "Alice", age = 4)
 print(p1)
+
+
+decidePlayer(p1)
+p1 <- decidePlayer(p1)
+p1
+
+p1 <- doubleAGE(p1)
+p1
+
+
 
 choices <- c("Cooperate", "Defect")
 decision <- sample(choices, 1)
