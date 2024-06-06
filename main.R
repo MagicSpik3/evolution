@@ -1,12 +1,49 @@
 # Define the Player class
-Player <- function(name) {
-  list(
-    name = name,
-    last_choice = NULL,
-    last_opponent_choice = NULL,
+# here is where we create the player
+new_player <- function(name, age = 0) {
+  structure(
+    list(
+      name = name,
+      last_choice = NULL,
+      last_opponent_choice = NULL,
+      my_next_choice = NULL,
+      age = age),
+
     class = "Player"
-  )
+    )
 }
+
+print.Player <- function(x) {
+  cat("Player: \n")
+  cat("\tName: ", x$name, "\n", sep = "")
+  cat("\tAge: ", x$age, "\n", sep = "")
+}
+
+mean(rnorm(100))
+mean(runif(100))
+
+decide.Player <- function(x){
+  x$age
+}
+
+doubleAGE <- function(x) UseMethod("doubleAGE")
+
+doubleAGE.Player <- function(x) {
+  x$age <- x$age*2
+  x
+}
+
+p1 <- doubleAGE(p1)
+p1
+
+decide.Player(p1)
+
+p1 <- new_player(name = "Alice", age = 4)
+print(p1)
+
+choices <- c("Cooperate", "Defect")
+decision <- sample(choices, 1)
+decision
 
 # Method to update the player's memory
 update_memory <- function(player, choice, opponent_choice) {
@@ -50,6 +87,9 @@ simulate_game <- function(player1, player2) {
 # Create two players
 player1 <- Player("Alice")
 player2 <- Player("Bob")
+
+
+player1
 
 # Initialize variables to keep track of the tournament
 tournament_results <- data.frame(

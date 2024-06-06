@@ -1,5 +1,6 @@
 # wip:
 #install.packages("testthat")
+getwd()
 library(testthat)
 usethis::use_test("test_calculate_scores.R")
 # Function to calculate scores in a Prisoner's Dilemma game
